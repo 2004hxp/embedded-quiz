@@ -1214,7 +1214,7 @@
                 <div class="progress-item">
                     <div class="progress-header">
                         <span class="progress-label">总进度</span>
-                        <span class="progress-value" id="totalProgress">0 / 91</span>
+                        <span class="progress-value" id="totalProgress">0 / 106</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="totalProgressBar" style="width: 0%"></div>
@@ -1259,7 +1259,7 @@
                     <div class="stat-item unanswered">
                         <span class="stat-icon">○</span>
                         <span class="stat-label">未答</span>
-                        <span class="stat-value" id="unansweredCount">91</span>
+                        <span class="stat-value" id="unansweredCount">106</span>
                     </div>
                 </div>
             </div>
@@ -1365,6 +1365,23 @@
                 {"id": 51, "question": "使用PreparedStatement语句访问数据库时，对于SQL语句中变动的部分，可以使用通配符( )代替。", "options": {"A": "?", "B": "空格", "C": "%", "D": ".."}, "answer": "A"},
                 {"id": 52, "question": "可以使用Connection的对象con调用( )方法对参数sql指定的SQL语句进行预先编译，生成数据库的底层命令，并将该命令封装在PreparedStatement对象中。", "options": {"A": "prepareStatement(String sql)", "B": "createStatement(String sql)", "C": "createPrepareStatement(String sql)", "D": "statement(String sql)"}, "answer": "A"},
                 {"id": 53, "question": "给出如下字符串String condition='insert book values(?,?,?,?,?)';下列哪个接口适合执行该SQL语句?( )", "options": {"A": "Statement", "B": "PreparedStatement", "C": "CallableStatement", "D": "不确定"}, "answer": "B"}
+            ],
+            "JavaWeb程序阅读题": [
+                {"id": 1, "question": "运行下面的Java脚本将输出什么字符串？\n<%\n   String strA=new String(\"让我们的明天会更好！\");\n   String strB=\"平平淡淡才是真！\";\n   out.println(strA.substring(4,6));\n   out.println(strB.substring(4,strB.length()));\n%>", "answer": "明天才是真！"},
+                {"id": 2, "question": "运行下面的程序，浏览器将会输出什么？\n<%@ page contentType=\"text/html;charset=utf-8\"%>\n<% int able=1; %>\n<html><body>\n<% if(able==1){%>\n欢迎登录!您的身份为\"普通管理员\"。\n<% }else if(able==2){%>\n欢迎登录!您的身份为\"系统管理员\"。\n<% } %>\n</body></html>", "answer": "欢迎登录！您的身份为\"普通管理员\""},
+                {"id": 3, "question": "首次访问以下页面，浏览器将会输出什么？\n<%@ page contentType=\"text/html;charset=UTF-8\" %>\n<%!\n    int num=0;\n    synchronized void add(){\n       num++;\n    }\n%>\n<% add(); %>\n<html><body><center>您是第<%=num%>位访问该页的游客！</center></body></html>", "answer": "您是第1位访问该页的游客！"},
+                {"id": 4, "question": "有如下程序片段:\n<form>\n<input type=\"text\"name=\"id\">\n<input type=\"submit\"value=\"提交\">\n</form>\n请设计代码用于获取该程序片段中的用户输入信息。", "answer": "request.getParameter(\"id\");"},
+                {"id": 5, "question": "运行index.jsp将输出什么结果？\nindex.jsp: <% session.setAttribute(\"information\",\"向session中保存数据\"); response.sendRedirect(\"forward.jsp\"); %>\nforward.jsp: <% session.removeAttribute(\"information\"); if(session.getAttribute(\"information\")==null){ out.print(\"session对象information已经不存在了\"); }else{ out.print(session.getAttribute(\"information\")); } %>", "answer": "session对象information已经不存在了"},
+                {"id": 6, "question": "阅读下面代码片段，该代码片段的作用是什么？\nRequestDispatcher dispatcher=request.getRequestDispatcher(\"a.jsp\");\ndispatcher.forward(request,response);", "answer": "将请求转发到a.jsp页面"},
+                {"id": 7, "question": "请说明以下JavaBean工具类的作用。\npublic class MyTools {\n    public String change(String source) {\n        source = source.replace(\"<\", \";\");\n        source = source.replace(\">\", \";\");\n        return source;\n    }\n}", "answer": "用来将字符串中的\"<\"和\">\"转换为\";\"符号"},
+                {"id": 8, "question": "调用该servlet后，网页将会显示什么？\n@WebServlet(\"/myServlet\")\npublic class MyServlet extends HttpServlet {\n    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=utf-8\");\n        PrintWriter out= response.getWriter();\n        out.println(\"保护环境爱护地球\");\n    }\n}", "answer": "保护环境爱护地球"},
+                {"id": 9, "question": "阅读下面代码片段，该段代码的作用是什么？\nJavaBeanclass bean=new JavaBeanclass(parameter);\nHttpSession session=request.getSession(true);\nsession.setAttribute(\"keyword\",bean);", "answer": "创建一个session周期的bean"},
+                {"id": 10, "question": "下面代码段的作用是什么？\nStatement stmt=conn.createStatement();\nint rtn=stmt.executeUpdate(\"update tb_user set name='hope',pwd='222'where name='dream'\");", "answer": "利用Statement对象修改数据表tb_user中name字段值为\"dream\"的记录，修改后的name字段值为\"hope\"，pwd字段值为\"222\""},
+                {"id": 11, "question": "下面代码段的作用是什么？\nPreparedStatement pStmt=conn.prepareStatement(\"update tb_user set name=?,pwd=? where name=?\");\npStmt.setString(1,\"dream\");\npStmt.setString(2,\"111\");\npStmt.setString(3,\"hope\");\nint rs=pStmt.executeUpdate();", "answer": "利用PreparedStatement对象修改数据表tb_user中name字段值为\"hope\"的记录，修改后的name字段值为\"dream\"，pwd字段值为\"111\""},
+                {"id": 12, "question": "下面代码段的作用是什么？\nStatement stmt=conn.createStatement();\nint rtn=stmt.executeUpdate(\"insert into tb_user (name,pwd)values('hope','111)\");", "answer": "应用Statement对象向数据表tb_user中添加用户名\"hope\"，密码\"111\""},
+                {"id": 13, "question": "下面代码段的作用是什么？\nPreparedStatement pStmt=conn.prepareStatement(\"insert into tb_user (name,pwd)values(?,?)\");\npStmt.setString(1,\"dream\");\npStmt.setString(2,\"111\");\nint rtn=pStmt.executeUpdate();", "answer": "利用PreparedStatement对象向数据表tb_user中添加用户名\"dream\"，密码\"111\""},
+                {"id": 14, "question": "下面代码段的作用是什么？\ntry{ Class.forName(\"com.microsoft.jdbc.sqlserver.SQLServerDriver\"); }\ncatch(Exception e){ out.print(e.toString()); }", "answer": "实现连接SQL Server数据库的驱动加载功能"},
+                {"id": 15, "question": "下面代码段的作用是什么？\ntry{ Class.forName(\"oracle.jdbc.driver.OracleDriver\"); }\ncatch(Exception e){ out.print(e.toString()); }", "answer": "实现连接Oracle数据库的驱动加载功能"}
             ]
         };
 
@@ -1373,7 +1390,7 @@
         let currentIndex = 0;
         let userAnswers = {};
         let questionStates = {};
-        let stats = { correct: 0, incorrect: 0, unanswered: 91 };
+        let stats = { correct: 0, incorrect: 0, unanswered: 106 };
         let isMistakeMode = false; // 是否在错题模式
         let mistakeQuestions = []; // 错题列表
         let isReviewMode = false; // 是否在整卷阅览模式
@@ -1399,7 +1416,7 @@
                     const data = JSON.parse(saved);
                     userAnswers = data.userAnswers || {};
                     questionStates = data.questionStates || {};
-                    stats = data.stats || { correct: 0, incorrect: 0, unanswered: 91 };
+                    stats = data.stats || { correct: 0, incorrect: 0, unanswered: 106 };
                     currentType = data.currentType || '嵌入式选择题';
                     currentIndex = data.currentIndex || 0;
                     return true;
@@ -1734,7 +1751,7 @@
             reviewCard.innerHTML = `
                 <div style="font-size: 48px; margin-bottom: var(--space-sm);">📖</div>
                 <div style="font-size: var(--font-size-lg); font-weight: 600; margin-bottom: var(--space-sm);">整卷阅览</div>
-                <div style="font-size: var(--font-size-sm); color: var(--text-secondary);">91 道题目</div>
+                <div style="font-size: var(--font-size-sm); color: var(--text-secondary);">106 道题目</div>
             `;
             reviewCard.onclick = () => {
                 enterReviewMode();
@@ -1788,7 +1805,7 @@
             reviewItem.className = `nav-item ${isReviewMode ? 'active' : ''}`;
             reviewItem.innerHTML = `
                 <span class="nav-label">📖 整卷阅览</span>
-                <span class="nav-badge">91</span>
+                <span class="nav-badge">106</span>
             `;
             reviewItem.onclick = () => enterReviewMode();
             typeNav.appendChild(reviewItem);
@@ -2204,7 +2221,7 @@
                 questionStates[key] = 'answered-incorrect';
             }
 
-            stats.unanswered = 91 - stats.correct - stats.incorrect;
+            stats.unanswered = 106 - stats.correct - stats.incorrect;
             updateStats();
             renderQuestionNumbers();
             renderTypeNav(); // 更新错题集数量
@@ -2234,9 +2251,9 @@
             const totalAnswered = Object.values(questionStates).filter(s => s === 'answered-correct' || s === 'answered-incorrect').length;
 
             // 总进度
-            document.getElementById('totalProgress').textContent = `${totalAnswered} / 91`;
-            document.getElementById('totalProgressBar').style.width = `${(totalAnswered / 91 * 100).toFixed(0)}%`;
-            document.getElementById('totalProgressPercent').textContent = `${(totalAnswered / 91 * 100).toFixed(0)}%`;
+            document.getElementById('totalProgress').textContent = `${totalAnswered} / 106`;
+            document.getElementById('totalProgressBar').style.width = `${(totalAnswered / 106 * 100).toFixed(0)}%`;
+            document.getElementById('totalProgressPercent').textContent = `${(totalAnswered / 106 * 100).toFixed(0)}%`;
 
             // 当前题型进度
             document.getElementById('typeProgress').textContent = `${currentIndex + 1} / ${questions.length}`;
@@ -2265,7 +2282,7 @@
             if (result) {
                 userAnswers = {};
                 questionStates = {};
-                stats = { correct: 0, incorrect: 0, unanswered: 91 };
+                stats = { correct: 0, incorrect: 0, unanswered: 106 };
                 currentType = '嵌入式选择题';
                 currentIndex = 0;
                 isMistakeMode = false;
