@@ -1214,7 +1214,7 @@
                 <div class="progress-item">
                     <div class="progress-header">
                         <span class="progress-label">总进度</span>
-                        <span class="progress-value" id="totalProgress">0 / 87</span>
+                        <span class="progress-value" id="totalProgress">0 / 38</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="totalProgressBar" style="width: 0%"></div>
@@ -1259,7 +1259,7 @@
                     <div class="stat-item unanswered">
                         <span class="stat-icon">○</span>
                         <span class="stat-label">未答</span>
-                        <span class="stat-value" id="unansweredCount">95</span>
+                        <span class="stat-value" id="unansweredCount">38</span>
                     </div>
                 </div>
             </div>
@@ -1270,34 +1270,24 @@
         // ===== 题目数据 =====
         const questionsData = {
             "选择题": [
-                {"id": 1, "question": "在STM32的USART通信中，用于发送数据的寄存器是", "options": {"A": "USART_SR", "B": "USART_DR", "C": "USART_BRR", "D": "USART_CR1"}, "answer": "B"},
-                {"id": 2, "question": "定时器的比较寄存器用于什么功能", "options": {"A": "设定计数器的最大值", "B": "设定计数器的初始值", "C": "设定计数器的目标值", "D": "设定计数器的步长"}, "answer": "C"},
-                {"id": 3, "question": "DMA传输过程中，哪个部件负责控制数据传输而不占用CPU时间", "options": {"A": "内存控制器", "B": "DMA控制器", "C": "I/O设备", "D": "中断控制器"}, "answer": "B"},
-                {"id": 4, "question": "STM32微控制器的DMA（直接存储器访问）主要用于什么", "options": {"A": "提高CPU利用率，减少CPU负担", "B": "降低CPU利用率", "C": "增加CPU计算能力", "D": "提高内存容量"}, "answer": "A"},
-                {"id": 5, "question": "STM32微控制器的ADC（模数转换器）主要用于什么", "options": {"A": "数字信号到模拟信号的转换", "B": "模拟信号到数字信号的转换", "C": "模拟信号放大", "D": "数字信号滤波"}, "answer": "B"},
-                {"id": 6, "question": "STM32微控制器的定时器TIMx可以用于哪些功能", "options": {"A": "仅用于生成PWM信号", "B": "仅用于测量外部信号周期", "C": "既可以用于生成PWM信号，也可以用于测量外部信号周期", "D": "仅用于控制LCD显示"}, "answer": "C"},
-                {"id": 7, "question": "STM32微控制器的SDIO接口主要用于什么", "options": {"A": "控制LCD显示", "B": "实现串口通信", "C": "读写SD卡", "D": "控制ADC采样频率"}, "answer": "C"},
-                {"id": 8, "question": "STM32微控制器的USART通信中，哪一种模式支持全双工通信", "options": {"A": "异步模式", "B": "同步模式", "C": "半双工模式", "D": "单工模式"}, "answer": "A"},
-                {"id": 9, "question": "STM32F1系列微控制器属于哪个ARM架构", "options": {"A": "ARM Cortex-M0", "B": "ARM Cortex-M3", "C": "ARM Cortex-M4", "D": "ARM Cortex-M7"}, "answer": "B"},
-                {"id": 10, "question": "STM32微控制器的定时器TIM2属于哪种类型", "options": {"A": "基本定时器", "B": "通用定时器", "C": "高级定时器", "D": "低功耗定时器"}, "answer": "B"},
-                {"id": 11, "question": "在 ARM Cortex-M4 低功耗模式下，以下哪种方式不能唤醒 CPU", "options": {"A": "外部中断", "B": "看门狗定时器复位", "C": "RTC闹钟事件", "D": "串口接收数据"}, "answer": "B"},
-                {"id": 12, "question": "嵌入式系统是指", "options": {"A": "通用计算机系统", "B": "专用计算机系统", "C": "大型主机", "D": "高性能计算机"}, "answer": "B"},
-                {"id": 13, "question": "DMA控制器的主要作用是", "options": {"A": "中断管理", "B": "总线仲裁", "C": "数据块高速传输", "D": "地址解码"}, "answer": "C"},
-                {"id": 14, "question": "ARM Cortex-M4内核使用的中断优先级数目为", "options": {"A": "4", "B": "8", "C": "16", "D": "256"}, "answer": "C"},
-                {"id": 15, "question": "USART模块常用波特率不包括", "options": {"A": "9600", "B": "19200", "C": "38400", "D": "12345"}, "answer": "D"},
-                {"id": 16, "question": "GPIO端口模式中，推挽输出是指", "options": {"A": "开漏输出", "B": "高低电平主动驱动", "C": "浮空输入", "D": "上拉输入"}, "answer": "B"},
-                {"id": 17, "question": "以下外设中属于通信接口的是", "options": {"A": "ADC", "B": "SPI", "C": "TIM2", "D": "GPIO"}, "answer": "B"},
-                {"id": 18, "question": "STM32F407的Cortex-M4内核主频最高可达", "options": {"A": "84MHz", "B": "168MHz", "C": "200MHz", "D": "240MHz"}, "answer": "B"},
-                {"id": 19, "question": "以下哪种GPIO模式适合读取按键输入", "options": {"A": "推挽输出", "B": "开漏输出", "C": "浮空输入", "D": "模拟输入"}, "answer": "C"},
-                {"id": 20, "question": "ADC转换过程正确的是", "options": {"A": "采样—保持—量化—编码", "B": "量化—保持—采样—编码", "C": "采样—编码—量化—保持", "D": "保持—编码—采样—量化"}, "answer": "A"},
-                {"id": 21, "question": "STM32微控制器的ADC转换结果通常存储在哪里", "options": {"A": "GPIO端口", "B": "DMA缓冲区", "C": "定时器寄存器", "D": "中断向量表"}, "answer": "B"},
-                {"id": 22, "question": "STM32微控制器的Flash存储器通常用于存储什么", "options": {"A": "RAM数据", "B": "程序代码", "C": "外设配置寄存器", "D": "用户数据"}, "answer": "B"},
-                {"id": 23, "question": "STM32微控制器的调试接口SWD（Serial Wire Debug）主要用于什么", "options": {"A": "提供高速数据传输", "B": "实现硬件调试和编程", "C": "控制GPIO端口", "D": "监控电源状态"}, "answer": "B"},
-                {"id": 24, "question": "Cortex-M4支持的中断向量表存储位置是", "options": {"A": "SRAM", "B": "FLASH", "C": "ROM", "D": "SDRAM"}, "answer": "B"},
-                {"id": 25, "question": "Flash的主要作用是", "options": {"A": "数据临时存储", "B": "程序长期存储", "C": "缓存数据", "D": "调试日志"}, "answer": "B"},
-                {"id": 26, "question": "UART通信的基本单位是", "options": {"A": "字节", "B": "字", "C": "双字", "D": "位"}, "answer": "A"},
-                {"id": 27, "question": "ARM处理器的工作模式不包括", "options": {"A": "用户模式", "B": "特权模式", "C": "管理模式", "D": "工程模式"}, "answer": "D"},
-                {"id": 28, "question": "中断优先级配置寄存器简称", "options": {"A": "IPR", "B": "ISR", "C": "IDR", "D": "ICR"}, "answer": "A"}
+                {"id": 1, "question": "定时器的比较寄存器用于什么功能？", "options": {"A": "设定计数器的最大值", "B": "设定计数器的初始值", "C": "设定计数器的目标值", "D": "设定计数器的步长"}, "answer": "C"},
+                {"id": 2, "question": "STM32是下面那个公司的产品。", "options": {"A": "三星", "B": "华为", "C": "意法半导体（ST）", "D": "高通"}, "answer": "C"},
+                {"id": 3, "question": "STM32微控制器的看门狗(WDG)功能主要用于什么？", "options": {"A": "防止程序跑飞", "B": "提高数据传输速率", "C": "增强安全性", "D": "减少功耗"}, "answer": "A"},
+                {"id": 4, "question": "嵌入式系统是一类特殊的计算机系统。下列产品中不属于嵌入式系统的是", "options": {"A": "电饭煲", "B": "路由器", "C": "巨型机", "D": "POS 机"}, "answer": "C"},
+                {"id": 5, "question": "嵌入式系统硬件的核心是 CPU。下面关于嵌入式系统 CPU 特点的叙述中，错误的是", "options": {"A": "支持实时处理", "B": "低功耗", "C": "字长在 16 位以下", "D": "集成了测试电路"}, "answer": "C"},
+                {"id": 6, "question": "下面是 IP 协议中C 类 IP 地址有关规定的叙述，其中正确的是", "options": {"A": "它适用于中型网络", "B": "它所在的网络最多只能连接254 台主机", "C": "它不能用于多目的地址发送(组播)", "D": "它的二进制表示中最高3 位一定是\"101\""}, "answer": "B"},
+                {"id": 7, "question": "以 ARM 内核为基础的嵌入式处理器芯片采用系统总线与外围总线的层次结构方式构建 片上系统，下面列出的组件中，不与外围总线相连的组件是", "options": {"A": "UART", "B": "DMA 控制器", "C": "ADC", "D": "USB 设备"}, "answer": "B"},
+                {"id": 8, "question": "下面关于串行外设接 口 SPI 的叙述中，错误的是", "options": {"A": "SPI 一般使用 4 条信号线：SCK 、MISO 、MOSI 和 SSEL", "B": "采用 SPI 可以构成\"一主一从式\"系统", "C": "采用 SPI 可以构成\" 一主多从式\" 系统", "D": "采用 SPI 不能构成\"多主多从式\"系统"}, "answer": "D"},
+                {"id": 9, "question": "关于 μC/OS-II 的基本特点，以下说法错误的是", "options": {"A": "μC/OS-II 是抢占式实时操作系统内核", "B": "由于存在内核任务，用户编写的应用程序最多可以有60 个任务", "C": "μC/OS-II 不支持时间片轮转调度法", "D": "μC/OS-II 允许每个任务有不同的栈空间"}, "answer": "B"},
+                {"id": 10, "question": "嵌入式系统的应用形式是多种多样的，不同的嵌入式应用系统，需要选择适合其应用需求的开发工具来进行开发。采用开发工具的主要目的是", "options": {"A": "提高开发质量，缩短开发周期，降低开发成本", "B": "优化软件代码，以便降低对存储器容量的需求", "C": "降低嵌入式系统的功耗", "D": "便于设计需要调用操作系统 API 函数的应用程序"}, "answer": "A"},
+                {"id": 11, "question": "STM32微控制器的SDIO接口主要用于什么？", "options": {"A": "控制LCD显示", "B": "实现串口通信", "C": "读写SD卡", "D": "控制ADC采样频率"}, "answer": "C"},
+                {"id": 12, "question": "STM32F1系列微控制器属于哪个ARM架构？", "options": {"A": "ARM Cortex-M0", "B": "ARM Cortex-M3", "C": "ARM Cortex-M4", "D": "ARM Cortex-M7"}, "answer": "B"},
+                {"id": 13, "question": "STM32微控制器的定时器TIM2属于哪种类型？", "options": {"A": "基本定时器", "B": "通用定时器", "C": "高级定时器", "D": "低功耗定时器"}, "answer": "B"},
+                {"id": 14, "question": "嵌入式系统是指", "options": {"A": "通用计算机系统", "B": "专用计算机系统", "C": "大型主机", "D": "高性能计算机"}, "answer": "B"},
+                {"id": 15, "question": "以下外设中属于通信接口的是", "options": {"A": "ADC", "B": "SPI", "C": "TIM2", "D": "GPIO"}, "answer": "B"},
+                {"id": 16, "question": "ADC转换过程正确的是", "options": {"A": "采样—保持—量化—编码", "B": "量化—保持—采样—编码", "C": "采样—编码—量化—保持", "D": "保持—编码—采样—量化"}, "answer": "A"},
+                {"id": 17, "question": "Flash的主要作用是", "options": {"A": "数据临时存储", "B": "程序长期存储", "C": "缓存数据", "D": "调试日志"}, "answer": "B"},
+                {"id": 18, "question": "下面哪一项不是实时操作系统必须具有的特征？", "options": {"A": "具有异步 I/O 和中断处理能力", "B": "任务切换时间和中断延迟时间确定", "C": "优先级中断和调度", "D": "轮转调度"}, "answer": "D"}
             ],
             "判断题": [
                 {"id": 1, "question": "在UART通信过程中，比特率等于波特率。", "answer": "×"},
@@ -1319,46 +1309,7 @@
                 {"id": 17, "question": "所谓不可屏蔽的中断就是优先级不可调整的中断。", "answer": "×"},
                 {"id": 18, "question": "向量中断控制器只负责优先级的分配与管理，中断的使能和禁止和它无关。", "answer": "×"},
                 {"id": 19, "question": "STM32的串口USART1既可以工作在异步模式下，也可工作在同步模式下。", "answer": "√"},
-                {"id": 20, "question": "所有的GPIO引脚有一个内部微弱的上拉和下拉，当它们被配置为输入时可以是激活的或者非激活的。", "answer": "√"},
-                {"id": 21, "question": "DMA传输方式无需CPU直接控制传输，也没有中断处理方式。", "answer": "√"},
-                {"id": 22, "question": "TM32 ADC只可以在单一模式下工作。", "answer": "×"},
-                {"id": 23, "question": "C 语言是嵌入式开发常用语言。", "answer": "√"},
-                {"id": 24, "question": "STM32F4的TIM定时器可以同时生成PWM波和捕获输入信号。", "answer": "√"},
-                {"id": 25, "question": "I²C总线通信需要至少两条信号线：SCL和SDA。", "answer": "√"},
-                {"id": 26, "question": "FreeRTOS的任务调度完全依赖硬件中断实现。", "answer": "×"},
-                {"id": 27, "question": "STM32中断优先级数值越小，优先等级越低。", "answer": "×"},
-                {"id": 28, "question": "STM32的ADC器件的分辨率有以下三种：8位、12位、16位。", "answer": "×"},
-                {"id": 29, "question": "STM32的串口USART1既可以工作在异步模式下，也可工作在同步模式下。", "answer": "√"},
-                {"id": 30, "question": "DMA传输方式无需CPU直接控制传输，也没有中断处理方式。", "answer": "√"},
-                {"id": 31, "question": "如果规则转换已经在运行，为了注入转换后确保同步，所有的ADC的规则转换被停止，并在注入转换结束时同步恢复。", "answer": "√"},
-                {"id": 32, "question": "Contex M3采用哈佛架构，指令和数据总线分开使用。", "answer": "√"},
-                {"id": 33, "question": "STM32三种低功耗模式中，功耗最低的是停机模式。", "answer": "×"},
-                {"id": 34, "question": "STM32为了低功耗，将所有的外设时钟都设置为不使能。", "answer": "√"},
-                {"id": 35, "question": "DMA传输过程中，数据传输的方向可以是从外设到内存，也可以是从外设到外设。", "answer": "×"},
-                {"id": 36, "question": "STM32微控制器的红外接收器可以用于遥控器信号的接收和解码。", "answer": "√"},
-                {"id": 37, "question": "STM32微控制器的高级定时器（TIM2）可以用于产生精确的PWM信号，但不能用于捕获外部信号。", "answer": "×"},
-                {"id": 38, "question": "STM32微控制器的USART串口通信协议支持同步和异步两种通信方式。", "answer": "×"},
-                {"id": 39, "question": "STM32微控制器的滴答时钟是基于外部晶振的频率来工作的。", "answer": "√"},
-                {"id": 40, "question": "STM32微控制器的高级定时器具有捕获比较功能，可用于PWM输出。", "answer": "√"},
-                {"id": 41, "question": "STM32微控制器的LCD液晶显示模块驱动需要使用定时器产生刷新信号。", "answer": "√"},
-                {"id": 42, "question": "STM32微控制器的看门狗功能可以防止系统死锁，但不能恢复系统状态。", "answer": "√"},
-                {"id": 43, "question": "STM32微控制器的I2C接口支持多主机模式，允许多个主机同时控制总线。", "answer": "×"},
-                {"id": 44, "question": "STM32微控制器的温湿度传感器接口可以直接读取传感器的数据，无需额外的信号处理。", "answer": "×"},
-                {"id": 45, "question": "STM32微控制器的GPIO端口可以配置为推挽输出模式，用于驱动LED灯。", "answer": "√"},
-                {"id": 46, "question": "STM32微控制器的滴答时钟可以由内部RC振荡器提供，但精度较低。", "answer": "√"},
-                {"id": 47, "question": "STM32微控制器内部集成了多种外设，如定时器、ADC、DAC等，但不包括USB接口。", "answer": "×"},
-                {"id": 48, "question": "STM32微控制器的Flash存储器是不可擦写的，一旦写入数据就不能更改。", "answer": "×"},
-                {"id": 49, "question": "STM32微控制器的USART通信接口只能工作在异步模式下，不能工作在同步模式下。", "answer": "×"},
-                {"id": 50, "question": "STM32微控制器的SPI接口只能用于全双工通信，不能用于半双工通信。", "answer": "×"},
-                {"id": 51, "question": "I2C总线支持多主控模式，这意味着多个设备可以在同一总线上作为主机控制数据传输。", "answer": "√"},
-                {"id": 52, "question": "红外接收器只能接收特定频率的红外信号，无法接收其他频率的信号。", "answer": "√"},
-                {"id": 53, "question": "看门狗定时器在系统出现故障时，能够自动重启系统，恢复正常的运行状态。", "answer": "√"},
-                {"id": 54, "question": "STM32系列MCU在使用电池供电时，提供3.3~5V的低电压工作能力。", "answer": "×"},
-                {"id": 55, "question": "stm32F4xx的固件库中，RCC_DeInit函数是将RCC寄存器重新设置为默认值。", "answer": "√"},
-                {"id": 56, "question": "STM32通过仲裁器来协调各个DMA 请求的优先权。", "answer": "√"},
-                {"id": 57, "question": "DMA传输方式无需CPU直接控制传输，也没有中断处理方式。", "answer": "√"},
-                {"id": 58, "question": "当STM32复位后，HSE（I）振荡器被选为系统时钟。", "answer": "×"},
-                {"id": 59, "question": "HAL库初始化时，将中断优先级分组设置为第0（4）组。", "answer": "×"}
+                {"id": 20, "question": "所有的GPIO引脚有一个内部微弱的上拉和下拉，当它们被配置为输入时可以是激活的或者非激活的。", "answer": "√"}
             ],
             "作图题": []
         };
@@ -1368,7 +1319,7 @@
         let currentIndex = 0;
         let userAnswers = {};
         let questionStates = {};
-        let stats = { correct: 0, incorrect: 0, unanswered: 87 };
+        let stats = { correct: 0, incorrect: 0, unanswered: 38 };
         let isMistakeMode = false; // 是否在错题模式
         let mistakeQuestions = []; // 错题列表
         let isReviewMode = false; // 是否在整卷阅览模式
@@ -1394,7 +1345,7 @@
                     const data = JSON.parse(saved);
                     userAnswers = data.userAnswers || {};
                     questionStates = data.questionStates || {};
-                    stats = data.stats || { correct: 0, incorrect: 0, unanswered: 87 };
+                    stats = data.stats || { correct: 0, incorrect: 0, unanswered: 38 };
                     currentType = data.currentType || '选择题';
                     currentIndex = data.currentIndex || 0;
                     return true;
@@ -1729,7 +1680,7 @@
             reviewCard.innerHTML = `
                 <div style="font-size: 48px; margin-bottom: var(--space-sm);">📖</div>
                 <div style="font-size: var(--font-size-lg); font-weight: 600; margin-bottom: var(--space-sm);">整卷阅览</div>
-                <div style="font-size: var(--font-size-sm); color: var(--text-secondary);">87 道题目</div>
+                <div style="font-size: var(--font-size-sm); color: var(--text-secondary);">38 道题目</div>
             `;
             reviewCard.onclick = () => {
                 enterReviewMode();
@@ -1783,7 +1734,7 @@
             reviewItem.className = `nav-item ${isReviewMode ? 'active' : ''}`;
             reviewItem.innerHTML = `
                 <span class="nav-label">📖 整卷阅览</span>
-                <span class="nav-badge">87</span>
+                <span class="nav-badge">38</span>
             `;
             reviewItem.onclick = () => enterReviewMode();
             typeNav.appendChild(reviewItem);
@@ -2199,7 +2150,7 @@
                 questionStates[key] = 'answered-incorrect';
             }
 
-            stats.unanswered = 87 - stats.correct - stats.incorrect;
+            stats.unanswered = 38 - stats.correct - stats.incorrect;
             updateStats();
             renderQuestionNumbers();
             renderTypeNav(); // 更新错题集数量
@@ -2229,9 +2180,9 @@
             const totalAnswered = Object.values(questionStates).filter(s => s === 'answered-correct' || s === 'answered-incorrect').length;
 
             // 总进度
-            document.getElementById('totalProgress').textContent = `${totalAnswered} / 87`;
-            document.getElementById('totalProgressBar').style.width = `${(totalAnswered / 87 * 100).toFixed(0)}%`;
-            document.getElementById('totalProgressPercent').textContent = `${(totalAnswered / 87 * 100).toFixed(0)}%`;
+            document.getElementById('totalProgress').textContent = `${totalAnswered} / 38`;
+            document.getElementById('totalProgressBar').style.width = `${(totalAnswered / 38 * 100).toFixed(0)}%`;
+            document.getElementById('totalProgressPercent').textContent = `${(totalAnswered / 38 * 100).toFixed(0)}%`;
 
             // 当前题型进度
             document.getElementById('typeProgress').textContent = `${currentIndex + 1} / ${questions.length}`;
@@ -2260,7 +2211,7 @@
             if (result) {
                 userAnswers = {};
                 questionStates = {};
-                stats = { correct: 0, incorrect: 0, unanswered: 87 };
+                stats = { correct: 0, incorrect: 0, unanswered: 38 };
                 currentType = '选择题';
                 currentIndex = 0;
                 isMistakeMode = false;
