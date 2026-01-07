@@ -456,14 +456,17 @@
             font-weight: 600;
         }
 
-        /* 论述题/程序题 */
-        .essay-area {
-            width: 100%;
+        /* 程序阅读题 */
+        .reading-answer-area {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
         }
 
-        .essay-textarea {
+        .reading-input {
             width: 100%;
-            min-height: 200px;
+            min-height: 120px;
             padding: var(--space-lg);
             border: 2px solid var(--border-color);
             border-radius: var(--radius-lg);
@@ -474,10 +477,31 @@
             transition: all var(--transition-base);
         }
 
-        .essay-textarea:focus {
+        .reading-input:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .reading-input:disabled {
+            background: var(--bg-secondary);
+            cursor: not-allowed;
+        }
+
+        .reading-submit-btn {
+            padding: var(--space-md) var(--space-xl);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-base);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            align-self: flex-start;
+        }
+
+        .reading-submit-btn:hover {
+            background: var(--primary-dark);
         }
 
         /* 导航控制栏 */
@@ -1555,7 +1579,6 @@
         function getMistakeQuestions() {
             const mistakes = [];
             Object.keys(questionsData).forEach(type => {
-                if (type === '作图题') return;
                 questionsData[type].forEach(q => {
                     const key = `${type}-${q.id}`;
                     if (questionStates[key] === 'answered-incorrect') {
@@ -1785,12 +1808,10 @@
 
         function getTypeIcon(type) {
             const icons = {
-                '选择题': '📝',
-                '填空题': '✏️',
-                '判断题': '✓',
-                '论述题': '📄',
-                '程序题': '💻',
-                '作图题': '📊'
+                '嵌入式选择题': '📝',
+                '嵌入式判断题': '✓',
+                'JavaWeb选择题': '☕',
+                'JavaWeb程序阅读题': '💻'
             };
             return icons[type] || '📚';
         }
@@ -1939,44 +1960,46 @@
             if (isReviewMode) {
                 const card = document.getElementById('questionCard');
                 let html = '<div class="review-all-questions">';
+                let sectionNum = 0;
 
-                // 选择题
-                const choiceQuestions = questionsData['选择题'];
-                html += '<h2 style="margin-bottom: var(--space-lg); color: var(--primary-color);">一、选择题</h2>';
-                choiceQuestions.forEach((q, index) => {
-                    html += `
-                        <div style="margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); border-bottom: 1px solid var(--divider-color);">
-                            <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm);">
-                                <span class="type-badge">选择题</span>
-                                <span style="font-weight: 600;">第 ${q.id} 题</span>
-                            </div>
-                            <div class="question-text">${q.question}</div>
-                            <div style="margin-top: var(--space-md); padding: var(--space-md); background: var(--success-bg); border-radius: var(--radius-md); border-left: 4px solid var(--success-color);">
-                                <span style="color: var(--success-color); font-weight: 600;">✓ 正确答案：${q.answer}</span>
-                                <span style="margin-left: var(--space-md); color: var(--text-secondary);">${q.options[q.answer]}</span>
-                            </div>
-                        </div>
-                    `;
-                });
+                // 遍历所有题型
+                for (const [type, questions] of Object.entries(questionsData)) {
+                    if (!questions || questions.length === 0) continue;
+                    sectionNum++;
 
-                // 判断题
-                const tfQuestions = questionsData['判断题'];
-                html += '<h2 style="margin: var(--space-xl) 0 var(--space-lg); color: var(--primary-color);">二、判断题</h2>';
-                tfQuestions.forEach((q, index) => {
-                    const answerText = q.answer === '√' ? '正确' : '错误';
-                    html += `
-                        <div style="margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); border-bottom: 1px solid var(--divider-color);">
-                            <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm);">
-                                <span class="type-badge">判断题</span>
-                                <span style="font-weight: 600;">第 ${q.id} 题</span>
+                    html += `<h2 style="margin: ${sectionNum > 1 ? 'var(--space-xl)' : '0'} 0 var(--space-lg); color: var(--primary-color);">${sectionNum}、${type}</h2>`;
+
+                    questions.forEach((q) => {
+                        const questionHtml = q.question.replace(/\n/g, '<br>');
+                        let answerDisplay = '';
+
+                        if (q.options) {
+                            // 选择题：显示选项和正确答案
+                            answerDisplay = `<span style="color: var(--success-color); font-weight: 600;">✓ 正确答案：${q.answer}</span>
+                                <span style="margin-left: var(--space-md); color: var(--text-secondary);">${q.options[q.answer]}</span>`;
+                        } else if (q.answer === '√' || q.answer === '×') {
+                            // 判断题
+                            const answerText = q.answer === '√' ? '正确' : '错误';
+                            answerDisplay = `<span style="color: var(--success-color); font-weight: 600;">✓ 正确答案：${q.answer} ${answerText}</span>`;
+                        } else {
+                            // 程序阅读题等其他题型
+                            answerDisplay = `<span style="color: var(--success-color); font-weight: 600;">✓ 参考答案：${q.answer}</span>`;
+                        }
+
+                        html += `
+                            <div style="margin-bottom: var(--space-xl); padding-bottom: var(--space-lg); border-bottom: 1px solid var(--divider-color);">
+                                <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-sm);">
+                                    <span class="type-badge">${type}</span>
+                                    <span style="font-weight: 600;">第 ${q.id} 题</span>
+                                </div>
+                                <div class="question-text">${questionHtml}</div>
+                                <div style="margin-top: var(--space-md); padding: var(--space-md); background: var(--success-bg); border-radius: var(--radius-md); border-left: 4px solid var(--success-color);">
+                                    ${answerDisplay}
+                                </div>
                             </div>
-                            <div class="question-text">${q.question}</div>
-                            <div style="margin-top: var(--space-md); padding: var(--space-md); background: var(--success-bg); border-radius: var(--radius-md); border-left: 4px solid var(--success-color);">
-                                <span style="color: var(--success-color); font-weight: 600;">✓ 正确答案：${q.answer} ${answerText}</span>
-                            </div>
-                        </div>
-                    `;
-                });
+                        `;
+                    });
+                }
 
                 html += '</div>';
                 card.innerHTML = html;
@@ -2041,9 +2064,15 @@
 
             // 根据题型渲染题目和答题区
             // 选择题和判断题：先显示题目，再显示选项
-            html += `<div class="question-text">${q.question}</div>`;
+            const questionHtml = q.question.replace(/\n/g, '<br>');
+            html += `<div class="question-text">${questionHtml}</div>`;
 
-            if (actualType === '选择题') {
+            // 判断题型：使用includes匹配
+            const isChoiceQuestion = actualType.includes('选择题');
+            const isTrueFalse = actualType.includes('判断题');
+            const isReadingQuestion = actualType.includes('程序阅读题');
+
+            if (isChoiceQuestion && q.options) {
                 html += '<div class="options-group">';
                 Object.entries(q.options).forEach(([key, value]) => {
                     const isSelected = savedAnswer === key;
@@ -2066,7 +2095,7 @@
                     `;
                 });
                 html += '</div>';
-            } else if (actualType === '判断题') {
+            } else if (isTrueFalse) {
                 html += `
                     <div class="true-false-area">
                         <div class="tf-option ${savedAnswer === '√' ? 'selected' : ''} ${(showAnswer || isAnswered) && q.answer === '√' ? 'correct' : ''} ${isAnswered && savedAnswer === '√' && !wasCorrect ? 'incorrect' : ''}"
@@ -2085,6 +2114,14 @@
                                 ${(showAnswer || isAnswered) && q.answer === '×' ? '<span style="color: var(--success-color); font-size: 12px;">正确答案</span>' : ''}
                             </div>
                         </div>
+                    </div>
+                `;
+            } else if (isReadingQuestion) {
+                // 程序阅读题：输入框
+                html += `
+                    <div class="reading-answer-area">
+                        <textarea class="reading-input" id="readingAnswer" placeholder="请输入你的答案..." ${isAnswered || showAnswer ? 'disabled' : ''}>${savedAnswer}</textarea>
+                        ${!isAnswered && !showAnswer ? '<button class="reading-submit-btn" onclick="submitReadingAnswer()">提交答案</button>' : ''}
                     </div>
                 `;
             }
@@ -2112,16 +2149,22 @@
 
             // 更新提交按钮状态
             const submitBtn = document.querySelector('.submit-btn');
-            if (isAnswered || showAnswer) {
-                submitBtn.disabled = true;
-                submitBtn.style.opacity = '0.5';
-                submitBtn.style.cursor = 'not-allowed';
-                submitBtn.textContent = showAnswer ? '阅览模式' : '已提交';
+            // 程序阅读题隐藏通用提交按钮
+            if (isReadingQuestion) {
+                submitBtn.style.display = 'none';
             } else {
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-                submitBtn.style.cursor = 'pointer';
-                submitBtn.textContent = '提交答案';
+                submitBtn.style.display = 'block';
+                if (isAnswered || showAnswer) {
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.5';
+                    submitBtn.style.cursor = 'not-allowed';
+                    submitBtn.textContent = showAnswer ? '阅览模式' : '已提交';
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.style.opacity = '1';
+                    submitBtn.style.cursor = 'pointer';
+                    submitBtn.textContent = '提交答案';
+                }
             }
 
             // 更新进度
@@ -2146,6 +2189,61 @@
             userAnswers[key] = value;
             saveProgress(); // 保存临时选择
             loadQuestion();
+        }
+
+        // ===== 提交程序阅读题答案 =====
+        function submitReadingAnswer() {
+            const q = questionsData[currentType][currentIndex];
+            const key = `${currentType}-${q.id}`;
+
+            if (questionStates[key] === 'answered-correct' || questionStates[key] === 'answered-incorrect') return;
+
+            const input = document.getElementById('readingAnswer');
+            const userAnswer = input.value.trim();
+
+            if (!userAnswer) {
+                showBubbleAlert({
+                    title: '请输入答案',
+                    message: '请先输入你的答案后再提交。',
+                    icon: '⚠️',
+                    type: 'warning'
+                });
+                return;
+            }
+
+            // 程序阅读题简单判断：只要有关键词就认为正确
+            const isCorrect = userAnswer.includes(q.answer) || q.answer.includes(userAnswer);
+
+            userAnswers[key] = userAnswer;
+            if (isCorrect) {
+                questionStates[key] = 'answered-correct';
+                stats.correct++;
+            } else {
+                questionStates[key] = 'answered-incorrect';
+                stats.incorrect++;
+                // 记录错题
+                if (!mistakeQuestions.find(mq => mq.key === key)) {
+                    mistakeQuestions.push({
+                        key: key,
+                        type: currentType,
+                        id: q.id,
+                        question: q.question,
+                        userAnswer: userAnswer,
+                        correctAnswer: q.answer
+                    });
+                }
+            }
+            stats.unanswered = 106 - stats.correct - stats.incorrect;
+            saveProgress();
+            loadQuestion();
+
+            // 显示结果提示
+            showBubbleAlert({
+                title: isCorrect ? '✓ 回答正确！' : '× 回答错误',
+                message: isCorrect ? '' : `参考答案：${q.answer}`,
+                icon: isCorrect ? '🎉' : '📝',
+                type: isCorrect ? 'success' : 'info'
+            });
         }
 
         // ===== 提交答案 =====
@@ -2176,6 +2274,17 @@
 
             q = questionsData[currentType][currentIndex];
             key = `${currentType}-${q.id}`;
+
+            // 程序阅读题使用专门的提交按钮
+            if (currentType.includes('程序阅读题')) {
+                showBubbleAlert({
+                    title: '请使用提交按钮',
+                    message: '程序阅读题请使用输入框下方的"提交答案"按钮。',
+                    icon: '📝',
+                    type: 'info'
+                });
+                return;
+            }
             actualType = currentType;
 
             // 检查是否已经提交过
