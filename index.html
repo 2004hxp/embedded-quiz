@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>嵌入式系统刷题平台</title>
+    <title>在线刷题平台</title>
     <style>
         /* ===== CSS 设计系统 ===== */
         :root {
@@ -1141,7 +1141,7 @@
 
     <!-- 首页视图 -->
     <div id="homeScreen" style="display: none; padding: var(--space-xl);">
-        <h1 style="text-align: center; color: var(--primary-color); margin-bottom: var(--space-xl);">嵌入式系统刷题</h1>
+        <h1 style="text-align: center; color: var(--primary-color); margin-bottom: var(--space-xl);">在线刷题</h1>
         <div id="homeTypeGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md);"></div>
     </div>
 
@@ -1214,7 +1214,7 @@
                 <div class="progress-item">
                     <div class="progress-header">
                         <span class="progress-label">总进度</span>
-                        <span class="progress-value" id="totalProgress">0 / 38</span>
+                        <span class="progress-value" id="totalProgress">0 / 91</span>
                     </div>
                     <div class="progress-bar">
                         <div class="progress-fill" id="totalProgressBar" style="width: 0%"></div>
@@ -1259,7 +1259,7 @@
                     <div class="stat-item unanswered">
                         <span class="stat-icon">○</span>
                         <span class="stat-label">未答</span>
-                        <span class="stat-value" id="unansweredCount">38</span>
+                        <span class="stat-value" id="unansweredCount">91</span>
                     </div>
                 </div>
             </div>
@@ -1269,7 +1269,7 @@
     <script>
         // ===== 题目数据 =====
         const questionsData = {
-            "选择题": [
+            "嵌入式选择题": [
                 {"id": 1, "question": "定时器的比较寄存器用于什么功能？", "options": {"A": "设定计数器的最大值", "B": "设定计数器的初始值", "C": "设定计数器的目标值", "D": "设定计数器的步长"}, "answer": "C"},
                 {"id": 2, "question": "STM32是下面那个公司的产品。", "options": {"A": "三星", "B": "华为", "C": "意法半导体（ST）", "D": "高通"}, "answer": "C"},
                 {"id": 3, "question": "STM32微控制器的看门狗(WDG)功能主要用于什么？", "options": {"A": "防止程序跑飞", "B": "提高数据传输速率", "C": "增强安全性", "D": "减少功耗"}, "answer": "A"},
@@ -1289,7 +1289,7 @@
                 {"id": 17, "question": "Flash的主要作用是", "options": {"A": "数据临时存储", "B": "程序长期存储", "C": "缓存数据", "D": "调试日志"}, "answer": "B"},
                 {"id": 18, "question": "下面哪一项不是实时操作系统必须具有的特征？", "options": {"A": "具有异步 I/O 和中断处理能力", "B": "任务切换时间和中断延迟时间确定", "C": "优先级中断和调度", "D": "轮转调度"}, "answer": "D"}
             ],
-            "判断题": [
+            "嵌入式判断题": [
                 {"id": 1, "question": "在UART通信过程中，比特率等于波特率。", "answer": "×"},
                 {"id": 2, "question": "定时器的计数方式只能是递增计数。", "answer": "×"},
                 {"id": 3, "question": "PI12表示GPIOI组12号引脚。", "answer": "×"},
@@ -1311,15 +1311,69 @@
                 {"id": 19, "question": "STM32的串口USART1既可以工作在异步模式下，也可工作在同步模式下。", "answer": "√"},
                 {"id": 20, "question": "所有的GPIO引脚有一个内部微弱的上拉和下拉，当它们被配置为输入时可以是激活的或者非激活的。", "answer": "√"}
             ],
-            "作图题": []
+            "JavaWeb选择题": [
+                {"id": 1, "question": "运行JSP时，不是必须的是( )。", "options": {"A": "操作系统", "B": "Java JDK", "C": "支持JSP的Web服务器", "D": "数据库"}, "answer": "D"},
+                {"id": 2, "question": "当用户请求JSP页面时，JSP引擎就会执行该页面的字节码文件响应客户的请求，执行字节码文件的结果是( )。", "options": {"A": "发送一个JSP源文件到客户端", "B": "发送一个Java文件到客户端", "C": "发送一个HTML页面到客户端", "D": "什么都不做"}, "answer": "C"},
+                {"id": 3, "question": "当多个用户请求同一个JSP页面时，Tomcat服务器为每个客户启动一个( )。", "options": {"A": "进程", "B": "线程", "C": "程序", "D": "服务"}, "answer": "B"},
+                {"id": 4, "question": "下列( )注释为隐藏型注释。", "options": {"A": "<!-- 注释内容!-->", "B": "<!-- 注释内容-->", "C": "<%// 注释内容%>", "D": "<%-- 注释内容 --%>"}, "answer": "D"},
+                {"id": 5, "question": "可以在以下哪个标记之间插入Java程序片?( )。", "options": {"A": "<% 和 %>", "B": "<% 和 %>", "C": "</ 和 %>", "D": "<% 和 !>"}, "answer": "A"},
+                {"id": 6, "question": "可以在以下哪个标记之间插入变量与方法声明?( )。", "options": {"A": "<% 和 %>", "B": "<% 和 %>", "C": "<%! 和 %>", "D": "<% 和 !>"}, "answer": "C"},
+                {"id": 7, "question": "下列变量声明在( )范围内有效。<%!Date dateTime; int countNum; %>", "options": {"A": "从定义开始处有效，客户之间不共享", "B": "在整个页面内有效，客户之间不共享", "C": "在整个页面内有效，被多个客户共享", "D": "从定义开始处有效，被多个客户共享"}, "answer": "C"},
+                {"id": 8, "question": "在\"<%=\"和\"%>\"标记之间放置( ),可以直接输出其值。", "options": {"A": "变量", "B": "Java表达式", "C": "字符串", "D": "数字"}, "answer": "B"},
+                {"id": 9, "question": "JSP 的编译指令标记通常是指( )。", "options": {"A": "page指令、include指令和taglib指令", "B": "page指令、jistI指令和plugin指令", "C": "forward指令、include指令和taglib指令", "D": "page指令、param指令和taglib指令"}, "answer": "A"},
+                {"id": 10, "question": "JSP 的page编译指令的属性language的默认值是( )。", "options": {"A": "JSP", "B": "C", "C": "Java", "D": "C++"}, "answer": "C"},
+                {"id": 11, "question": "include指令用于在JSP页面静态插入一个文件，插入文件可以是JSP页面、HTML网页、文本文件或一段Java代码，但必须保证插入后形成的文件是( )。", "options": {"A": "是一个完整的HTML文件", "B": "是一个完整的JSP文件", "C": "是一个完整的TXT文件", "D": "是一个完整的Java源文件"}, "answer": "B"},
+                {"id": 12, "question": "下列哪一项不属于JSP动作指令标记?( )。", "options": {"A": "<jsp param>", "B": "<jsp.forward>", "C": "<jsp:include>", "D": "<%@incude %>"}, "answer": "D"},
+                {"id": 13, "question": "动作标记( )的作用是:从该标记出现处停止当前JSP页面的继续执行，从而转向执行动作标记中page属性值指定的JSP页面。", "options": {"A": "<jsp:param>", "B": "<jsp:forward>", "C": "<jsp:include>", "D": "<jspuseBean>"}, "answer": "B"},
+                {"id": 14, "question": "可以使用( )方法实现客户的重定向。", "options": {"A": "response.setStatus()", "B": "response.setHeader()", "C": "response.setContentType()", "D": "response.sendRedirect()"}, "answer": "D"},
+                {"id": 15, "question": "下面( )内置对象是对客户的请求做出响应，向客户端发送数据的。", "options": {"A": "request", "B": "session", "C": "response", "D": "application"}, "answer": "C"},
+                {"id": 16, "question": "下面( )操作不能关闭session对象。", "options": {"A": "用户刷新当前页面调用", "B": "用户关闭浏览器", "C": "session达到设置的最长\"发呆\"时间", "D": "session对象的invalidate()方法"}, "answer": "A"},
+                {"id": 17, "question": "在JSP中使用( )对象保存用户会话信息。", "options": {"A": "request", "B": "session", "C": "response", "D": "application"}, "answer": "B"},
+                {"id": 18, "question": "在JSP中，如果选择一个内置对象保存聊天室信息，则选择( )对象。", "options": {"A": "request", "B": "session", "C": "response", "D": "application"}, "answer": "D"},
+                {"id": 19, "question": "下面对象中作用域最大的是( )。", "options": {"A": "page", "B": "request", "C": "application", "D": "session"}, "answer": "C"},
+                {"id": 20, "question": "JavaBean中方法的访问权限必须是( )。", "options": {"A": "private", "B": "public", "C": "protected", "D": "friendly"}, "answer": "B"},
+                {"id": 21, "question": "下面方式中正确使用JavaBean的是( )。", "options": {"A": "<jsp:useBean id=\"address\" class=\"tom.AddressBean\" scope=\"page\">", "B": "<jsp:useBean name=\"address\" class=\"tom.AddressBean\" scope=\"page\"/>", "C": "<jsp:useBean bean=\"address\" class=\"tom.AddressBean\" scope=\"page\" />", "D": "<jsp:useBean beanName=\"address\" class=\"AddressBean\" scope=\"page\" />"}, "answer": "A"},
+                {"id": 22, "question": "在JSP中调用JavaBean时不会用到的标记是( )。", "options": {"A": "<javabean>", "B": "<jsp:useBean>", "C": "<jsp:setProperty>", "D": "<jsp:getProperty>"}, "answer": "A"},
+                {"id": 23, "question": "JavaBean的作用域可以是( )、page、session和application。", "options": {"A": "request", "B": "response", "C": "out", "D": "以上都不对"}, "answer": "A"},
+                {"id": 24, "question": "在test.jsp文件中有如下一行代码：<jsp:useBean class=\"tom.jiafei.Test\"id=\"user\"scope=\"_ \" />要使user对象一直存在于会话中，直到终止或被删除为止，在下画线处应填入( )。", "options": {"A": "page", "B": "request", "C": "session", "D": "application"}, "answer": "C"},
+                {"id": 25, "question": "在JSP中使用<jsp:useBean>动作可以将JavaBean引入JSP页面，对JavaBean的访问范围不能是( )。", "options": {"A": "page", "B": "request", "C": "response", "D": "application"}, "answer": "C"},
+                {"id": 26, "question": "下面语句与<jsp:getProperty name=\"aBean\" property=\"jsp\"/>等价的是( )。", "options": {"A": "<%jsp()%>", "B": "<% out.print(aBean.getJsp());%>", "C": "<%=aBean.setJsp()%>", "D": "<% aBean.setJsp();%>"}, "answer": "B"},
+                {"id": 27, "question": "以下是有关jsp:setProperty和jsp:getProperty标记的描述，正确的是( )。", "options": {"A": "<jsp:setProperty>和<jsp:getProperty>标记都必须在<jsp:useBean>的开始标记和结束标记之间", "B": "这两个标记的name属性值必须与<jsp:useBean>标记的id属性值相对应", "C": "这两个标记的name属性值可以与<jsp:useBean>标记的id属性值不同", "D": "以上均不对"}, "answer": "B"},
+                {"id": 28, "question": "在JSP中使用<jsp:getProperty>标记时不会出现的属性是( )。", "options": {"A": "name", "B": "property", "C": "value", "D": "以上皆不会出现"}, "answer": "C"},
+                {"id": 29, "question": "下列选项中，( )不是Servlet中使用的方法。", "options": {"A": "doGet()", "B": "doPost()", "C": "service()", "D": "close()"}, "answer": "D"},
+                {"id": 30, "question": "下列选项中，对Servlet描述错误的是( )。", "options": {"A": "Servlet是一个特殊的Java类，它必须直接或间接实现Servlet接口", "B": "Servlet接口定义了Servlet的生命周期方法", "C": "当多个客户请求一个Servlet时，服务器为每一个客户启动一个进程", "D": "Servlet客户线程调用service方法响应客户的请求"}, "answer": "C"},
+                {"id": 31, "question": "下列Servlet的方法中，( )方法载入时被执行，且只执行一次，负责对Servlet进行初始化。", "options": {"A": "service()", "B": "init()", "C": "doPost()", "D": "destroy()"}, "answer": "B"},
+                {"id": 32, "question": "下列Servlet的方法中，( )方法用来为请求服务，在Servlet生命周期中，Servlet每被请求一次它就会被调用一次。", "options": {"A": "service()", "B": "init()", "C": "doPost()", "D": "destroy()"}, "answer": "A"},
+                {"id": 33, "question": "下列方法中，( )方法当服务器关闭时被调用，用来释放Servlet所占的资源。", "options": {"A": "service()", "B": "init()", "C": "doPost()", "D": "destroy()"}, "answer": "D"},
+                {"id": 34, "question": "编写一个过滤器类很简单，只要实现jakarta.servlet包中的（）接口。", "options": {"A": "Filter", "B": "Servlet", "C": "HttpServlet", "D": "HttpFilter"}, "answer": "A"},
+                {"id": 35, "question": "当Web服务器使用Servlet对象调用service()方法处理请求前，发现应用了某个过滤器时，Web服务器就会自动调用该过滤器的（）方法。", "options": {"A": "filter()", "B": "doFilter()", "C": "init()", "D": "destroy()"}, "answer": "B"},
+                {"id": 36, "question": "从Servlet3.0开始提供了注解（），使得不再需要在web.xml文件中进行Filter的部署描述。", "options": {"A": "@WebFilter", "B": "@WebServlet", "C": "@Filter", "D": "@Servlet"}, "answer": "A"},
+                {"id": 37, "question": "（）监听器监听session对象的创建与销毁。", "options": {"A": "HttpSessionAttributeListener", "B": "HttpSessionActivationListener", "C": "HttpSessionBindingListener", "D": "HttpSessionListener"}, "answer": "D"},
+                {"id": 38, "question": "在Web应用程序中有以下程序代码段，执行后转发到某个JSP页面：ArrayList<String> dogNames = new ArrayList<String>(); dogNames.add(\"goodDog\"); request.setAttribute(\"dogs\", dogNames);下列选项中，( )可以正确地使用EL取得数组中的值。", "options": {"A": "${dogs.0}", "B": "${dogs[0]}", "C": "${dogs.[0]}", "D": "${dogs\"0\"}"}, "answer": "B"},
+                {"id": 39, "question": "( )不是EL的隐含对象。", "options": {"A": "request", "B": "pageScope", "C": "sessionScope", "D": "applicationScope"}, "answer": "A"},
+                {"id": 40, "question": "JSTL标签( )可以实现Java程序中的if语句功能。", "options": {"A": "<c:set>", "B": "<c:out>", "C": "<c:forEach>", "D": "<c:if>"}, "answer": "D"},
+                {"id": 41, "question": "JSTL标签( )可以实现Java程序中的for语句功能。", "options": {"A": "<c:set>", "B": "<c:out>", "C": "<c:forEach>", "D": "<c:if>"}, "answer": "C"},
+                {"id": 42, "question": "与<jsp:include>功能类似的JSTL标签是( )。", "options": {"A": "<c:url>", "B": "<c:redirect>", "C": "<c:include>", "D": "<c:import>"}, "answer": "D"},
+                {"id": 43, "question": "基于Servlet的文件上传，将每一个文件用一个( )对象来封装。", "options": {"A": "jakarta.servlet.http.Part", "B": "jakarta.servlet.http.Multipart", "C": "jakarta.servlet.http.Parts", "D": "jakarta.servlet.http.Mulliparts"}, "answer": "A"},
+                {"id": 44, "question": "( )注解标注在Servlet上面，以表示该Servlet希望处理请求的MIME类型是multipart/form-data,进而支持文件上传的功能。", "options": {"A": "@WebServlet", "B": "@WebFiter", "C": "@Part", "D": "@MultipartConfig"}, "answer": "D"},
+                {"id": 45, "question": "基于表单的文件上传，需要将文件上传的表单属性enctype的值设置为( )。", "options": {"A": "multipart/form-data", "B": "application/x-www-form-urlencoded", "C": "text/plain", "D": "html/text"}, "answer": "A"},
+                {"id": 46, "question": "利用程序实现文件下载需要将报头的Content-Type的值设置为（），以便告诉浏览器其所输出内容的类型不是普通文本文件或HTML文件，而是一个要保存到本地的下载文件。", "options": {"A": "application/x-msdownload", "B": "multipart/form-data", "C": "application/x-www-form-urlencoded", "D": "text/plain"}, "answer": "A"},
+                {"id": 47, "question": "下列选项中，( )不是JDBC的工作任务。", "options": {"A": "与数据库建立连接", "B": "操作数据库，处理数据库返回的结果", "C": "在网页中生成表格", "D": "向数据库管理系统发送SQL语句"}, "answer": "C"},
+                {"id": 48, "question": "在JDBC中，( )接口不能被Connection创建。", "options": {"A": "Statement", "B": "PreparedStatement", "C": "CallableStatement", "D": "RowsetStatement"}, "answer": "D"},
+                {"id": 49, "question": "在JDBC中，下列哪个接口对象不能被Connection创建?( )", "options": {"A": "Statement", "B": "PreparedStatement", "C": "CallableStatement", "D": "RowsetStatement"}, "answer": "D"},
+                {"id": 50, "question": "给出了如下的查询条件字符串\"String condition=\"insert book values(?,?,?,?,?)\";\", ( )接口适合执行该SQL查询。", "options": {"A": "Statement", "B": "PreparedStatement", "C": "CallableStatement", "D": "不确定"}, "answer": "B"},
+                {"id": 51, "question": "使用PreparedStatement语句访问数据库时，对于SQL语句中变动的部分，可以使用通配符( )代替。", "options": {"A": "?", "B": "空格", "C": "%", "D": ".."}, "answer": "A"},
+                {"id": 52, "question": "可以使用Connection的对象con调用( )方法对参数sql指定的SQL语句进行预先编译，生成数据库的底层命令，并将该命令封装在PreparedStatement对象中。", "options": {"A": "prepareStatement(String sql)", "B": "createStatement(String sql)", "C": "createPrepareStatement(String sql)", "D": "statement(String sql)"}, "answer": "A"},
+                {"id": 53, "question": "给出如下字符串String condition='insert book values(?,?,?,?,?)';下列哪个接口适合执行该SQL语句?( )", "options": {"A": "Statement", "B": "PreparedStatement", "C": "CallableStatement", "D": "不确定"}, "answer": "B"}
+            ]
         };
 
         // ===== 状态管理 =====
-        let currentType = '选择题';
+        let currentType = '嵌入式选择题';
         let currentIndex = 0;
         let userAnswers = {};
         let questionStates = {};
-        let stats = { correct: 0, incorrect: 0, unanswered: 38 };
+        let stats = { correct: 0, incorrect: 0, unanswered: 91 };
         let isMistakeMode = false; // 是否在错题模式
         let mistakeQuestions = []; // 错题列表
         let isReviewMode = false; // 是否在整卷阅览模式
@@ -1345,8 +1399,8 @@
                     const data = JSON.parse(saved);
                     userAnswers = data.userAnswers || {};
                     questionStates = data.questionStates || {};
-                    stats = data.stats || { correct: 0, incorrect: 0, unanswered: 38 };
-                    currentType = data.currentType || '选择题';
+                    stats = data.stats || { correct: 0, incorrect: 0, unanswered: 91 };
+                    currentType = data.currentType || '嵌入式选择题';
                     currentIndex = data.currentIndex || 0;
                     return true;
                 } catch (e) {
@@ -1525,7 +1579,7 @@
         function exitMistakeMode() {
             isMistakeMode = false;
             mistakeQuestions = [];
-            currentType = '选择题';
+            currentType = '嵌入式选择题';
             currentIndex = 0;
             saveProgress();
             renderTypeNav();
@@ -1539,7 +1593,7 @@
             isReviewMode = true;
             isMistakeMode = false;
             mistakeQuestions = [];
-            currentType = '选择题';
+            currentType = '嵌入式选择题';
             currentIndex = 0;
             saveProgress();
             renderTypeNav();
@@ -1556,7 +1610,7 @@
         // ===== 退出整卷阅览模式 =====
         function exitReviewMode() {
             isReviewMode = false;
-            currentType = '选择题';
+            currentType = '嵌入式选择题';
             currentIndex = 0;
             saveProgress();
             renderTypeNav();
@@ -1680,7 +1734,7 @@
             reviewCard.innerHTML = `
                 <div style="font-size: 48px; margin-bottom: var(--space-sm);">📖</div>
                 <div style="font-size: var(--font-size-lg); font-weight: 600; margin-bottom: var(--space-sm);">整卷阅览</div>
-                <div style="font-size: var(--font-size-sm); color: var(--text-secondary);">38 道题目</div>
+                <div style="font-size: var(--font-size-sm); color: var(--text-secondary);">91 道题目</div>
             `;
             reviewCard.onclick = () => {
                 enterReviewMode();
@@ -1734,7 +1788,7 @@
             reviewItem.className = `nav-item ${isReviewMode ? 'active' : ''}`;
             reviewItem.innerHTML = `
                 <span class="nav-label">📖 整卷阅览</span>
-                <span class="nav-badge">38</span>
+                <span class="nav-badge">91</span>
             `;
             reviewItem.onclick = () => enterReviewMode();
             typeNav.appendChild(reviewItem);
@@ -2150,7 +2204,7 @@
                 questionStates[key] = 'answered-incorrect';
             }
 
-            stats.unanswered = 38 - stats.correct - stats.incorrect;
+            stats.unanswered = 91 - stats.correct - stats.incorrect;
             updateStats();
             renderQuestionNumbers();
             renderTypeNav(); // 更新错题集数量
@@ -2180,9 +2234,9 @@
             const totalAnswered = Object.values(questionStates).filter(s => s === 'answered-correct' || s === 'answered-incorrect').length;
 
             // 总进度
-            document.getElementById('totalProgress').textContent = `${totalAnswered} / 38`;
-            document.getElementById('totalProgressBar').style.width = `${(totalAnswered / 38 * 100).toFixed(0)}%`;
-            document.getElementById('totalProgressPercent').textContent = `${(totalAnswered / 38 * 100).toFixed(0)}%`;
+            document.getElementById('totalProgress').textContent = `${totalAnswered} / 91`;
+            document.getElementById('totalProgressBar').style.width = `${(totalAnswered / 91 * 100).toFixed(0)}%`;
+            document.getElementById('totalProgressPercent').textContent = `${(totalAnswered / 91 * 100).toFixed(0)}%`;
 
             // 当前题型进度
             document.getElementById('typeProgress').textContent = `${currentIndex + 1} / ${questions.length}`;
@@ -2211,8 +2265,8 @@
             if (result) {
                 userAnswers = {};
                 questionStates = {};
-                stats = { correct: 0, incorrect: 0, unanswered: 38 };
-                currentType = '选择题';
+                stats = { correct: 0, incorrect: 0, unanswered: 91 };
+                currentType = '嵌入式选择题';
                 currentIndex = 0;
                 isMistakeMode = false;
                 isReviewMode = false;
