@@ -1858,7 +1858,18 @@
                         <span class="nav-label">${type}</span>
                         <span class="nav-badge">${count}</span>
                     `;
-                    navItem.onclick = () => switchType(type);
+                    // 整卷阅览模式下跳转到锚点，否则切换题型
+                    navItem.onclick = () => {
+                        if (isReviewMode) {
+                            // 跳转到对应题型的锚点
+                            const anchor = document.getElementById(`review-section-${type}`);
+                            if (anchor) {
+                                anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                        } else {
+                            switchType(type);
+                        }
+                    };
                     typeNav.appendChild(navItem);
                 }
             });
@@ -1967,7 +1978,8 @@
                     if (!questions || questions.length === 0) continue;
                     sectionNum++;
 
-                    html += `<h2 style="margin: ${sectionNum > 1 ? 'var(--space-xl)' : '0'} 0 var(--space-lg); color: var(--primary-color);">${sectionNum}、${type}</h2>`;
+                    // 添加锚点id
+                    html += `<h2 id="review-section-${type}" style="margin: ${sectionNum > 1 ? 'var(--space-xl)' : '0'} 0 var(--space-lg); color: var(--primary-color);">${sectionNum}、${type}</h2>`;
 
                     questions.forEach((q) => {
                         const questionHtml = q.question.replace(/\n/g, '<br>');
