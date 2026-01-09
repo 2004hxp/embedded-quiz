@@ -1409,6 +1409,26 @@
             ]
         };
 
+        // ===== 辅助函数：固定随机顺序 =====
+        // 简单的字符串哈希函数
+        function hashCode(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // 转为32位整数
+            }
+            return Math.abs(hash);
+        }
+
+        // 基于种子的伪随机数生成器
+        function seededRandom(seed) {
+            return function() {
+                seed = (seed * 9301 + 49297) % 233280;
+                return seed / 233280;
+            };
+        }
+
         // ===== 状态管理 =====
         let currentType = '嵌入式选择题';
         let currentIndex = 0;
@@ -2096,11 +2116,15 @@
                 // 将选项转为数组
                 let optionsArray = Object.entries(q.options);
 
-                // 非整卷阅览模式下随机打乱选项顺序
+                // 非整卷阅览模式下使用固定的随机顺序（基于题目ID）
                 if (!isReviewMode) {
-                    // Fisher-Yates 洗牌算法
+                    // 使用题目ID生成固定的随机种子
+                    const seed = hashCode(key + q.id);
+                    let rng = seededRandom(seed);
+
+                    // Fisher-Yates 洗牌算法（使用固定种子）
                     for (let i = optionsArray.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
+                        const j = Math.floor(rng() * (i + 1));
                         [optionsArray[i], optionsArray[j]] = [optionsArray[j], optionsArray[i]];
                     }
                 }
