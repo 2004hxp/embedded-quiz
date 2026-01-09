@@ -2113,39 +2113,44 @@
             if (isChoiceQuestion && q.options) {
                 html += '<div class="options-group">';
 
-                // 将选项转为数组
-                let optionsArray = Object.entries(q.options);
+                // 固定的显示标签顺序
+                const labels = ['A', 'B', 'C', 'D'];
 
-                // 非整卷阅览模式下使用固定的随机顺序（基于题目ID）
+                // 获取所有选项内容
+                let contentEntries = Object.entries(q.options);
+
+                // 非整卷阅览模式下只打乱内容，不打乱标签顺序
                 if (!isReviewMode) {
-                    // 使用题目ID生成固定的随机种子
                     const seed = hashCode(key + q.id);
                     let rng = seededRandom(seed);
 
-                    // Fisher-Yates 洗牌算法（使用固定种子）
-                    for (let i = optionsArray.length - 1; i > 0; i--) {
+                    // Fisher-Yates 洗牌算法打乱内容
+                    for (let i = contentEntries.length - 1; i > 0; i--) {
                         const j = Math.floor(rng() * (i + 1));
-                        [optionsArray[i], optionsArray[j]] = [optionsArray[j], optionsArray[i]];
+                        [contentEntries[i], contentEntries[j]] = [contentEntries[j], contentEntries[i]];
                     }
                 }
 
-                // 渲染选项（标签A/B/C/D始终与对应文本保持关联）
-                optionsArray.forEach(([key, value]) => {
-                    const isSelected = savedAnswer === key;
-                    const isCorrectOption = key === q.answer;
+                // 渲染选项：标签固定（A/B/C/D），内容随机分配
+                contentEntries.forEach(([originalLabel, content], index) => {
+                    const displayLabel = labels[index];  // 显示标签：A, B, C, D
+                    const isSelected = savedAnswer === originalLabel;  // 用原始标签判断
+                    const isCorrectOption = originalLabel === q.answer;  // 用原始标签判断
+
                     let className = 'option-item';
                     if (isSelected) className += ' selected';
                     if (showAnswer && isCorrectOption) className += ' correct';
                     if (isAnswered && isCorrectOption) className += ' correct';
                     if (isAnswered && isSelected && !wasCorrect) className += ' incorrect';
 
-                    const onclickAttr = (isAnswered || showAnswer) ? '' : `onclick="selectOption('${key}')"`;
+                    // onclick传递原始标签
+                    const onclickAttr = (isAnswered || showAnswer) ? '' : `onclick="selectOption('${originalLabel}')"`;
 
                     html += `
                         <div class="${className}" ${onclickAttr}>
                             <div class="option-radio">${isSelected ? '●' : ''}</div>
-                            <span class="option-label">${key}</span>
-                            <span class="option-text">${value}</span>
+                            <span class="option-label">${displayLabel}</span>
+                            <span class="option-text">${content}</span>
                             ${(showAnswer && isCorrectOption) || (isAnswered && isCorrectOption) ? '<span style="color: var(--success-color); margin-left: auto;">✓ 正确答案</span>' : ''}
                         </div>
                     `;
