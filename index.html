@@ -2092,7 +2092,21 @@
 
             if (isChoiceQuestion && q.options) {
                 html += '<div class="options-group">';
-                Object.entries(q.options).forEach(([key, value]) => {
+
+                // 将选项转为数组
+                let optionsArray = Object.entries(q.options);
+
+                // 非整卷阅览模式下随机打乱选项顺序
+                if (!isReviewMode) {
+                    // Fisher-Yates 洗牌算法
+                    for (let i = optionsArray.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [optionsArray[i], optionsArray[j]] = [optionsArray[j], optionsArray[i]];
+                    }
+                }
+
+                // 渲染选项（标签A/B/C/D始终与对应文本保持关联）
+                optionsArray.forEach(([key, value]) => {
                     const isSelected = savedAnswer === key;
                     const isCorrectOption = key === q.answer;
                     let className = 'option-item';
