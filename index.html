@@ -1828,7 +1828,13 @@
                 <span class="nav-label">📖 整卷阅览</span>
                 <span class="nav-badge">106</span>
             `;
-            reviewItem.onclick = () => enterReviewMode();
+            reviewItem.onclick = () => {
+                if (isReviewMode) {
+                    exitReviewMode();  // 退出整卷阅览
+                } else {
+                    enterReviewMode(); // 进入整卷阅览
+                }
+            };
             typeNav.appendChild(reviewItem);
 
             // 添加错题集入口（桌面端）
