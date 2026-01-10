@@ -1429,6 +1429,13 @@
             };
         }
 
+        // HTML转义函数
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
         // ===== 状态管理 =====
         let currentType = '嵌入式选择题';
         let currentIndex = 0;
@@ -2102,7 +2109,7 @@
 
             // 根据题型渲染题目和答题区
             // 选择题和判断题：先显示题目，再显示选项
-            const questionHtml = q.question.replace(/\n/g, '<br>');
+            const questionHtml = escapeHtml(q.question).replace(/\n/g, '<br>');
             html += `<div class="question-text">${questionHtml}</div>`;
 
             // 判断题型：使用includes匹配
@@ -2150,7 +2157,7 @@
                         <div class="${className}" ${onclickAttr}>
                             <div class="option-radio">${isSelected ? '●' : ''}</div>
                             <span class="option-label">${displayLabel}</span>
-                            <span class="option-text">${content}</span>
+                            <span class="option-text">${escapeHtml(content)}</span>
                             ${(showAnswer && isCorrectOption) || (isAnswered && isCorrectOption) ? '<span style="color: var(--success-color); margin-left: auto;">✓ 正确答案</span>' : ''}
                         </div>
                     `;
